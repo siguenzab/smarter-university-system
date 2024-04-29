@@ -33,14 +33,12 @@ class QuizzesTest(unittest.TestCase):
         self.assertIsNone(answer_1, 'Dates cannot be saved in bool type or JSON.')
 
     def test_expose_failure_03(self):
-        """
-        Implement this function and two more that
-        execute the code and make it fail.
-        Program crashed: quizzes_controller.py line 19, invalid extension 
-        """
-        self.ctrl = QuizzesController("quizzez_controller")
-        self.assertIsNone(self.ctrl,"File should not be created since it is not JSON extension")
+        # Clearing previous data
+        self.ctrl.clear_data()
 
+        quiz_id = self.ctrl.add_quiz("A", "B", 1, 1)
+        # Triggering exception in Line 21 of data_loader.py
+        self.ctrl.add_question(quiz_id, b"some binary string", "D")
 
 if __name__ == '__main__':
     unittest.main()
